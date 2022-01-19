@@ -1,0 +1,22 @@
+import requests # requests 라이브러리 설치 필요
+#1. 모든 구의 IDEX_MVL 값을 찍어주자!
+
+r = requests.get('http://spartacodingclub.shop/sparta_api/seoulair')
+    #res  = requests.get(url) 형식으로 요청합니다.
+
+rjson = r.json()
+    #.json()	dict 타입의 데이터 일 경우 사용
+
+rows = rjson['RealtimeCityAir']['row']
+
+#for row in rows:     -> 이렇게 하면 어떤 결과값이 나오는지 보기.
+     #print(row['MSRSTE_NM'], row['IDEX_MVL'])
+
+for row in rows:
+    gu_name = row['MSRSTE_NM']
+    gu_mise = row['IDEX_MVL']
+
+    #IDEX_MVL 값이 60 미만인 구만 찍어주자!
+    if gu_mise < 60:
+        print(gu_name)
+    #들여쓰기가 얼마나 중요한지 다시한번 확인해보세요!
